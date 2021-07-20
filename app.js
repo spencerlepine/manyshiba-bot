@@ -2,6 +2,11 @@ import twit from 'twit';
 import config from './config.js';
 
 const twitterClient = new twit(config);
+const INTERVAL = 1000 * 60 * 60; // s, m, h
+
+const fetchRandomImage = async () => {
+  // fetch something
+}
 
 const postTweet = (tweetContent) => {
   twitterClient.post(
@@ -13,4 +18,7 @@ const postTweet = (tweetContent) => {
   );
 }
 
-postTweet('https://cdn.shibe.online/shibes/fc962a6218715fd998d41fc4f551863ed45635a4.jpg')
+setTimeout(() => {
+  const dogImage = fetchRandomImage();
+  postTweet(dogImage);
+}, INTERVAL);
