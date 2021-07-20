@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import twit from 'twit';
 import config from './config';
 
-dotenv.config(); // access with process.env.TWITTER_API_KEY
+const twitterClient = new twit(config);

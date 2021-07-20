@@ -1,6 +1,9 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 module.exports = {
-  apiKey: '<YOUR-TWITTER-API-KEY>',
-  apiSecret: '<YOUR-TWITTER-API-SECRET>',
-  accessToken: '<YOUR-TWITTER-ACCESS-TOKEN>',
-  accessTokenSecret: '<YOUR-TWITTER-ACCESS-TOKEN-SECRET>',
+  consumer_key: process.env.TWITTER_API_KEY,
+  consumer_secret: process.env.TWITTER_API_SECRET,
+  access_token: process.env.TWITTER_API_ACCESS_TOKEN,
+  access_token_secret: process.env.TWITTER_API_ACCESS_TOKEN_SECRET,
 }
