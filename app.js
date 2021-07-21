@@ -55,6 +55,8 @@ const tweetImage = (tweetContent) => {
   }
 }
 
-setTimeout(async () => {
-  const dogImage = await fetchRandomImage(tweetImage);
-}, INTERVAL);
+while (true) {
+  setTimeout(async () => {
+    const dogImage = await fetchRandomImage(tweetImage);
+  }, INTERVAL);
+}
