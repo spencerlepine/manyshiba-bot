@@ -8,34 +8,28 @@ const twitterClient = new twit(config);
 const INTERVAL = 1000 * 60 * 60; // s, m, h
 const API_ENDPOINT = 'http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false';
 
-const urlToBase64 = async (imgUrl, callback) => {
+const urlToBase64 = async (imgUrl, tweetFunction) => {
   await http.get(imgUrl, async (httpRes) => {
     httpRes.setEncoding('base64');
-    let body = "data:" + httpRes.headers["content-type"] + ";base64,";
-    let withoutPrefix = "";
+    // Exclude -> "data:" + httpRes.headers["content-type"] + ";base64,";
+    let body = "";
     await httpRes.on('data', (data) => {
       body += data;
-      withoutPrefix += data;
     });
     await httpRes.on('end', () => {
-      callback(withoutPrefix);
+      tweetFunction(body);
     });
   }).on('error', (e) => {
     console.log(`Got error: ${e.message}`);
   });
 }
 
-const fetchRandomImage = async () => {
+const fetchRandomImage = async (tweetFunction) => {
   const resultList = await fetch(API_ENDPOINT).then(res => res.json());
   const newImage = resultList[0];
 
-  // Convert the image to base64
-  var b64content;
-  await urlToBase64(newImage, (result) => {
-    tweetImage(result);
-  });
-
-  return b64content;
+  // Convert the image to base64 before tweeting
+  await urlToBase64(newImage, tweetFunction);
 }
 
 const tweetImage = (tweetContent) => {
@@ -62,6 +56,5 @@ const tweetImage = (tweetContent) => {
 }
 
 setTimeout(async () => {
-  const dogImage = await fetchRandomImage();
-  tweetImage(dogImage);
+  const dogImage = await fetchRandomImage(tweetImage);
 }, INTERVAL);
