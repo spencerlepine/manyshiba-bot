@@ -5,7 +5,6 @@ import http from 'http';
 
 const twitterClient = new twit(config);
 
-const INTERVAL = 1000 * 60 * 60; // s, m, h
 const API_ENDPOINT = 'http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false';
 
 const urlToBase64 = async (imgUrl, tweetFunction) => {
@@ -55,8 +54,4 @@ const tweetImage = (tweetContent) => {
   }
 }
 
-while (true) {
-  setTimeout(async () => {
-    const dogImage = await fetchRandomImage(tweetImage);
-  }, INTERVAL);
-}
+fetchRandomImage(tweetImage);
