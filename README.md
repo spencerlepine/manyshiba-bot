@@ -7,7 +7,7 @@
 ### 🛠️ Built with:
  - [Shibe.online API](https://shibe.online/)
  - [Node.js](https://nodejs.org/)
- - [twit](https://www.npmjs.com/package/twit)
+ - [Twitter API](https://developer.twitter.com/)
 
 ## ⚙️ Setup
 
